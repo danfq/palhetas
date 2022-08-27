@@ -38,6 +38,8 @@ dependencies:
   webfeed: ^0.7.0
   http: ^0.13.5
   intl: ^0.17.0
+  html2md: ^1.2.6
+  flutter_markdown: ^0.6.10+5
 
 dev_dependencies:
   flutter_test:
