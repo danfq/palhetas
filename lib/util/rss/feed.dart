@@ -23,6 +23,7 @@ class Feed {
       //Add Item to List
       feedItems.add(
         RSSItemModel(
+          atomFeed.authors!.first.name!,
           item.title!,
           item.content!,
           item.media!.thumbnails![0].url!,
@@ -40,12 +41,14 @@ class Feed {
 
 ///RSS Item Model
 class RSSItemModel {
+  final String author;
   final String title;
   final String body;
   final String imageURL;
   final String published;
 
   const RSSItemModel(
+    this.author,
     this.title,
     this.body,
     this.imageURL,
@@ -54,6 +57,7 @@ class RSSItemModel {
 
   factory RSSItemModel.fromItem(Map<String, dynamic> item) {
     return RSSItemModel(
+      item["author"],
       item["title"],
       item["body"],
       item["imageURL"],

@@ -31,6 +31,7 @@ class MainWidgets {
     required bool allowBack,
     List<Widget>? actions,
     required Widget body,
+    FloatingActionButton? floatingActionButton,
   }) {
     return Scaffold(
       appBar: defaultAppBar(
@@ -42,6 +43,7 @@ class MainWidgets {
       body: SafeArea(
         child: body,
       ),
+      floatingActionButton: floatingActionButton,
     );
   }
 }
