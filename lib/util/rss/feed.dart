@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter/src/widgets/framework.dart';
 import 'package:flutter/src/foundation/key.dart';
 import 'package:intl/intl.dart';
+import 'package:palhetas/pages/feed/item.dart';
+import 'package:palhetas/util/navigation/routing.dart';
 import 'package:palhetas/values/constants.dart';
 import 'package:webfeed/webfeed.dart';
 import 'package:http/http.dart' as http;
@@ -24,7 +26,9 @@ class Feed {
           item.title!,
           item.content!,
           item.media!.thumbnails![0].url!,
-          item.published!,
+          DateFormat("dd-MM-yyyy | HH:mm").format(
+            DateTime.parse(item.published!),
+          ),
         ),
       );
     });
@@ -71,45 +75,48 @@ class RSSItem extends StatefulWidget {
 class _RSSItemState extends State<RSSItem> {
   @override
   Widget build(BuildContext context) {
-    return Padding(
-      padding: const EdgeInsets.all(20.0),
-      child: Card(
-        child: Padding(
-          padding: const EdgeInsets.all(10.0),
-          child: Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: [
-              Expanded(
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Text(
-                      widget.rssItem.title,
-                      style: const TextStyle(
-                        fontWeight: FontWeight.bold,
-                        fontSize: 16.0,
+    return InkWell(
+      onTap: () {
+        Routing.sideRoute(context: context, newPage: FeedItem(item: widget));
+      },
+      child: Padding(
+        padding: const EdgeInsets.all(20.0),
+        child: Card(
+          child: Padding(
+            padding: const EdgeInsets.all(10.0),
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                Expanded(
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Text(
+                        widget.rssItem.title,
+                        style: const TextStyle(
+                          fontWeight: FontWeight.bold,
+                          fontSize: 16.0,
+                        ),
                       ),
-                    ),
-                    const SizedBox(
-                      height: 20.0,
-                    ),
-                    Text(
-                      DateFormat("dd-MM-yyyy | HH:mm").format(
-                        DateTime.parse(widget.rssItem.published),
+                      const SizedBox(
+                        height: 20.0,
                       ),
-                      style: const TextStyle(
-                        fontStyle: FontStyle.italic,
-                        fontSize: 12.0,
-                      ),
-                    )
-                  ],
+                      Text(
+                        widget.rssItem.published,
+                        style: const TextStyle(
+                          fontStyle: FontStyle.italic,
+                          fontSize: 12.0,
+                        ),
+                      )
+                    ],
+                  ),
                 ),
-              ),
-              Padding(
-                padding: const EdgeInsets.all(10.0),
-                child: Image.network(widget.rssItem.imageURL),
-              ),
-            ],
+                Padding(
+                  padding: const EdgeInsets.all(10.0),
+                  child: Image.network(widget.rssItem.imageURL),
+                ),
+              ],
+            ),
           ),
         ),
       ),
