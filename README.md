@@ -1,16 +1,11 @@
-# palhetas
+# Palhetas
 
-A new Flutter project.
+## PT
+Esta App destina-se a trazer o conhecido Blog "Palhetas na Foz" para dispositivos móveis.
 
-## Getting Started
+Qualquer dispositivo com `Android 5.0`, ou superior, pode instalar a App, através do ficheiro de instalação, encontrado na página de [Lançamentos](/releases).
 
-This project is a starting point for a Flutter application.
+## ENG
+This App serves as a way to bring the known "Palhetas na Foz" Blog to mobile devices.
 
-A few resources to get you started if this is your first Flutter project:
-
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
-
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+Any device running `Android 5.0`, or above, can install the App, using the installation file, provided in the [Releases](/releases) page.
