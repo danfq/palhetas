@@ -1,9 +1,11 @@
+import 'package:awesome_notifications/awesome_notifications.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_markdown/flutter_markdown.dart';
 import 'package:palhetas/pages/feed/web.dart';
 import 'package:palhetas/util/navigation/routing.dart';
 import 'package:palhetas/util/rss/feed.dart';
+import 'package:palhetas/values/constants.dart';
 import 'package:palhetas/widgets/main_widgets.dart';
 import 'package:html2md/html2md.dart' as HTML2MD;
 import 'package:share_plus/share_plus.dart';
@@ -41,9 +43,33 @@ class _FeedItemState extends State<FeedItem> {
       ),
       floatingActionButton: FloatingActionButton(
         child: const Icon(CupertinoIcons.share),
-        onPressed: () {
+        onPressed: () async {
           Share.share(
-            "${widget.item.rssItem.title}\n\n-\n${widget.item.rssItem.author}\n(https://opalhetasnafoz.blogspot.com/)\n${widget.item.rssItem.published}",
+            Constants.shareText(
+              title: widget.item.rssItem.title,
+              author: widget.item.rssItem.author,
+              published: widget.item.rssItem.published,
+            ),
+          );
+
+          //Notification
+          await AwesomeNotifications().isNotificationAllowed().then(
+            (isAllowed) {
+              if (!isAllowed) {
+                AwesomeNotifications().requestPermissionToSendNotifications();
+              } else {
+                AwesomeNotifications().createNotification(
+                  content: NotificationContent(
+                    id: 14,
+                    channelKey: "palhetas_channel",
+                    wakeUpScreen: true,
+                    title: "Nova Notícia",
+                    body: widget.item.rssItem.title,
+                    notificationLayout: NotificationLayout.BigText,
+                  ),
+                );
+              }
+            },
           );
         },
       ),

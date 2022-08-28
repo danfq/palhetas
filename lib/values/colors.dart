@@ -15,4 +15,11 @@ class AppColors {
     "nav_bar_dark": Color(0xFF7F8487),
     "nav_bar_light": Color(0xFFE7F6F2),
   };
+
+  ///MDDM
+  /// - Colors from MDDM
+  static const Map<String, Color> mddmPalette = {
+    "accent_mati": Color(0xFF008080),
+    "accent_dan": Color(0xFFE91E63),
+  };
 }
