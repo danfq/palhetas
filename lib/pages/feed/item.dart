@@ -51,26 +51,6 @@ class _FeedItemState extends State<FeedItem> {
               published: widget.item.rssItem.published,
             ),
           );
-
-          //Notification
-          await AwesomeNotifications().isNotificationAllowed().then(
-            (isAllowed) {
-              if (!isAllowed) {
-                AwesomeNotifications().requestPermissionToSendNotifications();
-              } else {
-                AwesomeNotifications().createNotification(
-                  content: NotificationContent(
-                    id: 14,
-                    channelKey: "palhetas_channel",
-                    wakeUpScreen: true,
-                    title: "Nova Notícia",
-                    body: widget.item.rssItem.title,
-                    notificationLayout: NotificationLayout.BigText,
-                  ),
-                );
-              }
-            },
-          );
         },
       ),
     );
