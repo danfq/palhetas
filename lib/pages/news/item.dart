@@ -93,6 +93,7 @@ class NewsItem extends StatelessWidget {
             //Scrollable Content
             Expanded(
               child: SingleChildScrollView(
+                physics: const BouncingScrollPhysics(),
                 child: Padding(
                   padding: const EdgeInsets.all(14.0),
                   child: HtmlWidget(article.content),
