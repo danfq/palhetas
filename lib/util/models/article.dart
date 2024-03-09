@@ -48,7 +48,7 @@ class Article extends StatelessWidget {
   }
 
   ///JSON Object to `Article`
-  factory Article.fromJSON(Map<String, dynamic> json) {
+  factory Article.fromJSON(Map<dynamic, dynamic> json) {
     return Article(
       id: json["id"],
       url: json["url"],
