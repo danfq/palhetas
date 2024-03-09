@@ -26,7 +26,8 @@ class Article extends StatelessWidget {
   final String imageURL;
 
   ///Article
-  Article({
+  const Article({
+    super.key,
     required this.id,
     required this.url,
     required this.title,
