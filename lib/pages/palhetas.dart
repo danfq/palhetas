@@ -37,7 +37,7 @@ class _PalhetasState extends State<Palhetas> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: MainWidgets.appBar(
-        title: const Text("Palhetas na Foz"),
+        title: const Text("O Palhetas na Foz"),
         allowBack: false,
         centerTitle: false,
       ),
