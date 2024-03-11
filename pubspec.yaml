@@ -32,6 +32,7 @@ dependencies:
   icons_launcher: ^2.1.7
   fast_cached_network_image: ^1.2.8
   fluttertoast: ^8.2.4
+  url_launcher: ^6.2.5
 
 dev_dependencies:
   flutter_test:
