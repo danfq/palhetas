@@ -1,7 +1,7 @@
 import 'package:fast_cached_network_image/fast_cached_network_image.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
-import 'package:get/route_manager.dart';
 import 'package:palhetas/pages/news/item.dart';
 import 'package:palhetas/util/data/constants.dart';
 
@@ -63,51 +63,60 @@ class Article extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: const EdgeInsets.all(14.0),
-      child: GestureDetector(
-        onTap: () async {
-          await Get.to(() => NewsItem(article: this));
-        },
-        child: Row(
-          children: [
-            //Image
-            ClipRRect(
-              borderRadius: BorderRadius.circular(14.0),
-              child: imageURL.isNotEmpty
-                  ? FastCachedImage(
-                      url: imageURL,
-                      filterQuality: FilterQuality.high,
-                      fit: BoxFit.cover,
-                      height: 120.0,
-                    )
-                  : SvgPicture.network(
-                      Constants.noImage,
-                      fit: BoxFit.cover,
-                      height: 120.0,
-                    ),
+      padding: const EdgeInsets.all(10.0),
+      child: InkWell(
+        borderRadius: BorderRadius.circular(14.0),
+        onTap: () {
+          Navigator.push(
+            context,
+            CupertinoPageRoute(
+              builder: (context) => NewsItem(article: this),
             ),
+          );
+        },
+        child: Padding(
+          padding: const EdgeInsets.all(4.0),
+          child: Row(
+            children: [
+              //Image
+              ClipRRect(
+                borderRadius: BorderRadius.circular(14.0),
+                child: imageURL.isNotEmpty
+                    ? FastCachedImage(
+                        url: imageURL,
+                        filterQuality: FilterQuality.high,
+                        fit: BoxFit.cover,
+                        height: 120.0,
+                      )
+                    : SvgPicture.network(
+                        Constants.noImage,
+                        fit: BoxFit.cover,
+                        height: 120.0,
+                      ),
+              ),
 
-            //Title
-            Expanded(
-              child: Padding(
-                padding: const EdgeInsets.all(12.0),
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    Expanded(
-                      child: Text(
-                        title,
-                        style: const TextStyle(
-                          fontWeight: FontWeight.bold,
-                          fontSize: 16.0,
+              //Title
+              Expanded(
+                child: Padding(
+                  padding: const EdgeInsets.all(12.0),
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      Expanded(
+                        child: Text(
+                          title,
+                          style: const TextStyle(
+                            fontWeight: FontWeight.bold,
+                            fontSize: 16.0,
+                          ),
                         ),
                       ),
-                    ),
-                  ],
+                    ],
+                  ),
                 ),
               ),
-            ),
-          ],
+            ],
+          ),
         ),
       ),
     );

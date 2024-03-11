@@ -8,12 +8,17 @@ import 'package:palhetas/util/notifications/toast.dart';
 import 'package:palhetas/util/widgets/main.dart';
 import 'package:share_plus/share_plus.dart';
 
-class NewsItem extends StatelessWidget {
+class NewsItem extends StatefulWidget {
   const NewsItem({super.key, required this.article});
 
   ///Article
   final Article article;
 
+  @override
+  State<NewsItem> createState() => _NewsItemState();
+}
+
+class _NewsItemState extends State<NewsItem> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -42,7 +47,7 @@ class NewsItem extends StatelessWidget {
                     //Check if Present
                     bool isAlreadyPresent = false;
                     for (var item in offlineNews) {
-                      if (item["id"] == article.id) {
+                      if (item["id"] == widget.article.id) {
                         isAlreadyPresent = true;
                         break;
                       }
@@ -50,7 +55,7 @@ class NewsItem extends StatelessWidget {
 
                     if (!isAlreadyPresent) {
                       //Add if Not Present
-                      offlineNews.add(article.toJSON());
+                      offlineNews.add(widget.article.toJSON());
 
                       //Save New List
                       await LocalData.updateValue(
@@ -78,7 +83,7 @@ class NewsItem extends StatelessWidget {
               icon: const Icon(Ionicons.ios_share_outline),
               onPressed: () async {
                 //Share Article
-                await Share.share(article.url);
+                await Share.share(widget.article.url);
               },
             ),
           ),
@@ -88,7 +93,7 @@ class NewsItem extends StatelessWidget {
         child: Column(
           children: [
             //Title
-            MainWidgets.pageTitle(title: article.title),
+            MainWidgets.pageTitle(title: widget.article.title),
 
             //Scrollable Content
             Expanded(
@@ -96,7 +101,7 @@ class NewsItem extends StatelessWidget {
                 physics: const BouncingScrollPhysics(),
                 child: Padding(
                   padding: const EdgeInsets.all(14.0),
-                  child: HtmlWidget(article.content),
+                  child: HtmlWidget(widget.article.content),
                 ),
               ),
             ),

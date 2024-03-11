@@ -37,12 +37,12 @@ class MainWidgets {
   }
 
   ///Page Title
-  static Widget pageTitle({required String title}) {
+  static Widget pageTitle({required String title, double? textSize}) {
     return Padding(
       padding: const EdgeInsets.all(16.0),
       child: Text(
         title,
-        style: const TextStyle(fontSize: 24.0, letterSpacing: 1.2),
+        style: TextStyle(fontSize: textSize ?? 24.0, letterSpacing: 1.2),
       ),
     );
   }

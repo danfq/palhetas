@@ -1,6 +1,5 @@
 import 'package:palhetas/util/data/constants.dart';
 import 'package:palhetas/util/models/article.dart';
-import 'package:uuid/uuid.dart';
 import 'package:webfeed_revised/webfeed_revised.dart';
 import 'package:http/http.dart' as http;
 

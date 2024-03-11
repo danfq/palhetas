@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_vector_icons/flutter_vector_icons.dart';
 import 'package:palhetas/pages/news/news.dart';
 import 'package:palhetas/pages/offline/offline.dart';
-import 'package:palhetas/util/theming/controller.dart';
 import 'package:palhetas/util/widgets/main.dart';
 
 class Palhetas extends StatefulWidget {

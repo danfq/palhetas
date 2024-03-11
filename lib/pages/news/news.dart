@@ -1,9 +1,4 @@
-import 'package:fast_cached_network_image/fast_cached_network_image.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_svg/svg.dart';
-import 'package:get/route_manager.dart';
-import 'package:palhetas/pages/news/item.dart';
-import 'package:palhetas/util/data/constants.dart';
 import 'package:palhetas/util/data/news.dart';
 
 class News extends StatelessWidget {
