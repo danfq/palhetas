@@ -19,6 +19,26 @@ class NewsItem extends StatefulWidget {
 }
 
 class _NewsItemState extends State<NewsItem> {
+  ///Offline News Items
+  final offlineNews = LocalData.boxData(box: "offline")["items"] ?? [];
+
+  ///Check if Item is in Offline News
+  bool checkIfOffline() {
+    //Status
+    bool isAlreadyPresent = false;
+
+    //Check
+    for (var item in offlineNews) {
+      if (item["id"] == widget.article.id) {
+        isAlreadyPresent = true;
+        break;
+      }
+    }
+
+    //Return Status
+    return isAlreadyPresent;
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -27,53 +47,43 @@ class _NewsItemState extends State<NewsItem> {
         centerTitle: false,
         actions: [
           //Offline
-          IconButton(
-            icon: const Icon(Ionicons.ios_cloud_offline_outline),
-            onPressed: () async {
-              //Confirmation
-              await Get.defaultDialog(
-                title: "Guardar Offline",
-                content: const Text("Guardar para ler offline?"),
-                cancel: TextButton(
-                  onPressed: () => Get.back(),
-                  child: const Text("Cancelar"),
-                ),
-                confirm: ElevatedButton(
-                  onPressed: () async {
-                    //Offline News Items
-                    final offlineNews =
-                        LocalData.boxData(box: "offline")["items"] ?? [];
+          Visibility(
+            visible: !checkIfOffline(),
+            child: IconButton(
+              icon: const Icon(Ionicons.ios_cloud_offline_outline),
+              onPressed: () async {
+                //Confirmation
+                await Get.defaultDialog(
+                  title: "Guardar Offline",
+                  content: const Text("Guardar para ler offline?"),
+                  cancel: TextButton(
+                    onPressed: () => Get.back(),
+                    child: const Text("Cancelar"),
+                  ),
+                  confirm: ElevatedButton(
+                    onPressed: () async {
+                      if (!checkIfOffline()) {
+                        //Add if Not Present
+                        offlineNews.add(widget.article.toJSON());
 
-                    //Check if Present
-                    bool isAlreadyPresent = false;
-                    for (var item in offlineNews) {
-                      if (item["id"] == widget.article.id) {
-                        isAlreadyPresent = true;
-                        break;
+                        //Save New List
+                        await LocalData.updateValue(
+                          box: "offline",
+                          item: "items",
+                          value: offlineNews,
+                        );
+
+                        Get.back();
+                      } else {
+                        Get.back();
+                        LocalNotifications.toast(message: "Já está guardado!");
                       }
-                    }
-
-                    if (!isAlreadyPresent) {
-                      //Add if Not Present
-                      offlineNews.add(widget.article.toJSON());
-
-                      //Save New List
-                      await LocalData.updateValue(
-                        box: "offline",
-                        item: "items",
-                        value: offlineNews,
-                      );
-
-                      Get.back();
-                    } else {
-                      Get.back();
-                      LocalNotifications.toast(message: "Já está guardado!");
-                    }
-                  },
-                  child: const Text("Guardar"),
-                ),
-              );
-            },
+                    },
+                    child: const Text("Guardar"),
+                  ),
+                );
+              },
+            ),
           ),
 
           //Share
