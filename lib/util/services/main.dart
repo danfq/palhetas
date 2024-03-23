@@ -1,7 +1,5 @@
-import 'package:connectivity_plus/connectivity_plus.dart';
 import 'package:fast_cached_network_image/fast_cached_network_image.dart';
 import 'package:flutter/material.dart';
-import 'package:palhetas/pages/connection/none.dart';
 import 'package:palhetas/pages/intro/intro.dart';
 import 'package:palhetas/pages/palhetas.dart';
 import 'package:palhetas/util/data/local.dart';
@@ -26,20 +24,10 @@ class MainServices {
 
   ///Initial Route
   static Future<Widget> initialRoute() async {
-    //Connectivity Result
-    final connResult = await Connectivity().checkConnectivity();
-
-    //Connected
-    final bool connected = connResult != ConnectivityResult.none;
-
     //Intro Status
     final bool introStatus = LocalData.boxData(box: "intro")["status"] ?? false;
 
     //Return Initial Route
-    return connected
-        ? introStatus
-            ? const Palhetas()
-            : const Intro()
-        : const NoConnection();
+    return introStatus ? const Palhetas() : const Intro();
   }
 }

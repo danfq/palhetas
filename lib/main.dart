@@ -19,6 +19,7 @@ void main() async {
       initial: AdaptiveThemeMode.light,
       builder: (light, dark) {
         return GetMaterialApp(
+          debugShowCheckedModeBanner: false,
           theme: light,
           darkTheme: dark,
           home: initialRoute,

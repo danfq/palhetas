@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/widgets.dart';
 import 'package:flutter_vector_icons/flutter_vector_icons.dart';
 import 'package:flutter_widget_from_html/flutter_widget_from_html.dart';
 import 'package:get/route_manager.dart';
@@ -100,22 +101,22 @@ class _NewsItemState extends State<NewsItem> {
         ],
       ),
       body: SafeArea(
-        child: Column(
-          children: [
-            //Title
-            MainWidgets.pageTitle(title: widget.article.title),
-
-            //Scrollable Content
-            Expanded(
-              child: SingleChildScrollView(
-                physics: const BouncingScrollPhysics(),
-                child: Padding(
-                  padding: const EdgeInsets.all(14.0),
-                  child: HtmlWidget(widget.article.content),
-                ),
+        child: SingleChildScrollView(
+          child: Column(
+            children: [
+              //Title
+              MainWidgets.pageTitle(
+                title: widget.article.title,
+                textSize: 24.0,
               ),
-            ),
-          ],
+
+              //Content
+              Padding(
+                padding: const EdgeInsets.all(14.0),
+                child: HtmlWidget(widget.article.content),
+              ),
+            ],
+          ),
         ),
       ),
     );
