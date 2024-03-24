@@ -42,7 +42,11 @@ class MainWidgets {
       padding: const EdgeInsets.all(16.0),
       child: Text(
         title,
-        style: TextStyle(fontSize: textSize ?? 24.0, letterSpacing: 1.2),
+        style: TextStyle(
+          fontSize: textSize ?? 24.0,
+          letterSpacing: 1.2,
+          fontWeight: FontWeight.bold,
+        ),
       ),
     );
   }

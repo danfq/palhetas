@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_vector_icons/flutter_vector_icons.dart';
 import 'package:get/route_manager.dart';
+import 'package:palhetas/pages/events/events.dart';
 import 'package:palhetas/pages/news/news.dart';
 import 'package:palhetas/pages/offline/offline.dart';
 import 'package:palhetas/util/data/constants.dart';
@@ -25,8 +26,12 @@ class _PalhetasState extends State<Palhetas> {
       case 0:
         return const News();
 
-      //Offline
+      //Events
       case 1:
+        return const Events();
+
+      //Offline
+      case 2:
         return const Offline();
 
       //Default - Error
@@ -83,6 +88,7 @@ class _PalhetasState extends State<Palhetas> {
             _navIndex = index;
           });
         },
+        selectedItemColor: Colors.blue,
         items: const [
           //Home
           BottomNavigationBarItem(
@@ -91,6 +97,15 @@ class _PalhetasState extends State<Palhetas> {
               child: Icon(Ionicons.ios_newspaper),
             ),
             label: "Últimas Notícias",
+          ),
+
+          //Events
+          BottomNavigationBarItem(
+            icon: Padding(
+              padding: EdgeInsets.all(8.0),
+              child: Icon(FontAwesome5Solid.theater_masks),
+            ),
+            label: "Eventos",
           ),
 
           //Offline
