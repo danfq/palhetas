@@ -32,6 +32,7 @@ class NewsHandler {
           overview: item.content?.split(".").first ?? "", //First Sentence
           content: item.content ?? "", //Entire Content
           imageURL: item.media?.thumbnails?.first.url ?? "", //First Media URL
+          publishDate: item.published ?? "",
         );
 
         //Add Article to List

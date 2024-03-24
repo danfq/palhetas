@@ -75,8 +75,13 @@ class _NewsItemState extends State<NewsItem> {
                         );
 
                         Get.back();
+
+                        //Notify User
+                        LocalNotifications.toast(message: "Guardado!");
                       } else {
                         Get.back();
+
+                        //Notify User
                         LocalNotifications.toast(message: "Já está guardado!");
                       }
                     },

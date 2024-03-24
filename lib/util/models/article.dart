@@ -25,6 +25,9 @@ class Article extends StatelessWidget {
   ///Image URL
   final String imageURL;
 
+  ///Publish Date
+  final String publishDate;
+
   ///Article
   const Article({
     super.key,
@@ -34,6 +37,7 @@ class Article extends StatelessWidget {
     required this.overview,
     required this.content,
     required this.imageURL,
+    required this.publishDate,
   });
 
   ///`Article` to JSON Object
@@ -45,6 +49,7 @@ class Article extends StatelessWidget {
       "overview": overview,
       "content": content,
       "imageURL": imageURL,
+      "publishDate": publishDate,
     };
   }
 
@@ -57,6 +62,7 @@ class Article extends StatelessWidget {
       overview: json["overview"],
       content: json["content"],
       imageURL: json["imageURL"],
+      publishDate: json["publishDate"],
     );
   }
 
