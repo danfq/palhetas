@@ -16,4 +16,7 @@ class Constants {
   ///No Image
   static const noImage =
       "https://upload.wikimedia.org/wikipedia/commons/6/65/No-Image-Placeholder.svg";
+
+  ///Weather Service API Key
+  static const weatherServiceAPIKey = "b9766ef100bb237f883d472d35b1e86b";
 }

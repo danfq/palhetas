@@ -4,6 +4,7 @@ import 'package:get/route_manager.dart';
 import 'package:palhetas/pages/events/events.dart';
 import 'package:palhetas/pages/news/news.dart';
 import 'package:palhetas/pages/offline/offline.dart';
+import 'package:palhetas/pages/weather/weather.dart';
 import 'package:palhetas/util/data/constants.dart';
 import 'package:palhetas/util/widgets/main.dart';
 import 'package:url_launcher/url_launcher.dart';
@@ -26,12 +27,16 @@ class _PalhetasState extends State<Palhetas> {
       case 0:
         return const News();
 
-      //Events
+      //Weather
       case 1:
+        return const Weather();
+
+      //Events
+      case 2:
         return const Events();
 
       //Offline
-      case 2:
+      case 3:
         return const Offline();
 
       //Default - Error
@@ -88,6 +93,7 @@ class _PalhetasState extends State<Palhetas> {
             _navIndex = index;
           });
         },
+        unselectedItemColor: Theme.of(context).iconTheme.color,
         selectedItemColor: Colors.blue,
         items: const [
           //Home
@@ -97,6 +103,15 @@ class _PalhetasState extends State<Palhetas> {
               child: Icon(Ionicons.ios_newspaper),
             ),
             label: "Últimas Notícias",
+          ),
+
+          //Weather
+          BottomNavigationBarItem(
+            icon: Padding(
+              padding: EdgeInsets.all(8.0),
+              child: Icon(Ionicons.ios_sunny),
+            ),
+            label: "Tempo",
           ),
 
           //Events

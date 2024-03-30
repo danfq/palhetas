@@ -35,6 +35,7 @@ dependencies:
   url_launcher: ^6.2.5
   html: ^0.15.4
   download: ^1.0.0
+  weather_pack: ^1.1.0
 
 dev_dependencies:
   flutter_test:
