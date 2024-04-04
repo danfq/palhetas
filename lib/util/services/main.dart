@@ -3,14 +3,16 @@ import 'package:flutter/material.dart';
 import 'package:palhetas/pages/intro/intro.dart';
 import 'package:palhetas/pages/palhetas.dart';
 import 'package:palhetas/util/data/local.dart';
+import 'package:palhetas/util/services/tts.dart';
 
 ///Main Services
 class MainServices {
   ///Initialize Main Services:
   ///
   ///- Widgets Binding.
-  ///- Cached Image Engine (FastCachedNetworkImage)
+  ///- Cached Image Engine (FastCachedNetworkImage).
   ///- Local Data (Hive).
+  ///- TTS.
   static Future<void> init() async {
     //Ensure Widgets Binding is Initialized
     WidgetsFlutterBinding.ensureInitialized();
@@ -20,6 +22,9 @@ class MainServices {
 
     //Local Data
     await LocalData.init();
+
+    //TTS
+    await TTSEngine.init();
   }
 
   ///Initial Route

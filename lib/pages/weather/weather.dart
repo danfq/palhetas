@@ -171,7 +171,7 @@ class _WeatherState extends State<Weather> {
                 //Cloudiness
                 ListTile(
                   leading: const Icon(Ionicons.cloud),
-                  title: const Text("Neblina"),
+                  title: const Text("Nuvens"),
                   subtitle: Text("${data.cloudiness}%"),
                 ),
               ],

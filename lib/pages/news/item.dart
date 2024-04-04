@@ -2,9 +2,11 @@ import 'package:flutter/material.dart';
 import 'package:flutter_vector_icons/flutter_vector_icons.dart';
 import 'package:flutter_widget_from_html/flutter_widget_from_html.dart';
 import 'package:get/route_manager.dart';
+import 'package:html/parser.dart';
 import 'package:palhetas/util/data/local.dart';
 import 'package:palhetas/util/models/article.dart';
 import 'package:palhetas/util/notifications/toast.dart';
+import 'package:palhetas/util/services/tts.dart';
 import 'package:palhetas/util/widgets/main.dart';
 import 'package:share_plus/share_plus.dart';
 
@@ -38,6 +40,9 @@ class _NewsItemState extends State<NewsItem> {
     //Return Status
     return isAlreadyPresent;
   }
+
+  ///Check if TTS is Running
+  bool ttsRunning = false;
 
   @override
   Widget build(BuildContext context) {
@@ -88,6 +93,63 @@ class _NewsItemState extends State<NewsItem> {
                   ),
                 );
               },
+            ),
+          ),
+
+          //Text-to-Speech
+          IconButton(
+            onPressed: () async {
+              //Check if Running
+              if (!ttsRunning) {
+                //Confirm
+                await Get.defaultDialog(
+                  title: "Ouvir Notícia?",
+                  content: const Text(
+                    "Para desligar, basta tocar no mesmo botão.",
+                  ),
+                  contentPadding: const EdgeInsets.all(14.0),
+                  cancel: TextButton(
+                    onPressed: () => Get.back(),
+                    child: const Text("Cancelar"),
+                  ),
+                  confirm: ElevatedButton(
+                    onPressed: () async {
+                      //Speak Article
+                      if (widget.article.content.isNotEmpty) {
+                        //Parse Content
+                        final parsedContent = HtmlParser(
+                          widget.article.content,
+                        ).parse();
+
+                        //Speak
+                        await TTSEngine.speak(
+                          text: parsedContent.body!.text,
+                        );
+
+                        //Start TTS
+                        setState(() {
+                          ttsRunning = true;
+                        });
+                      }
+
+                      Get.back();
+                    },
+                    child: const Text("Confirmar"),
+                  ),
+                );
+              } else {
+                //Stop TTS
+                setState(() {
+                  ttsRunning = false;
+                });
+
+                await TTSEngine.stop();
+              }
+            },
+            icon: Icon(
+              ttsRunning
+                  ? MaterialCommunityIcons.text_to_speech_off
+                  : MaterialCommunityIcons.text_to_speech,
             ),
           ),
 

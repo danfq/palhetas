@@ -36,6 +36,8 @@ dependencies:
   html: ^0.15.4
   download: ^1.0.0
   weather_pack: ^1.1.0
+  flutter_tts: ^4.0.2
+  html_parser_plus: ^0.1.4
 
 dev_dependencies:
   flutter_test:

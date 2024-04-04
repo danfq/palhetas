@@ -27,16 +27,12 @@ class _PalhetasState extends State<Palhetas> {
       case 0:
         return const News();
 
-      //Weather
-      case 1:
-        return const Weather();
-
       //Events
-      case 2:
+      case 1:
         return const Events();
 
       //Offline
-      case 3:
+      case 2:
         return const Offline();
 
       //Default - Error
@@ -102,16 +98,7 @@ class _PalhetasState extends State<Palhetas> {
               padding: EdgeInsets.all(8.0),
               child: Icon(Ionicons.ios_newspaper),
             ),
-            label: "Últimas Notícias",
-          ),
-
-          //Weather
-          BottomNavigationBarItem(
-            icon: Padding(
-              padding: EdgeInsets.all(8.0),
-              child: Icon(Ionicons.ios_sunny),
-            ),
-            label: "Tempo",
+            label: "Notícias",
           ),
 
           //Events
