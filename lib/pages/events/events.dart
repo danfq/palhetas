@@ -46,7 +46,15 @@ class Events extends StatelessWidget {
             return const Center(child: Text("Nenhum Evento"));
           }
         } else {
-          return const Center(child: CircularProgressIndicator());
+          return const Column(
+            mainAxisSize: MainAxisSize.max,
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              Center(child: CircularProgressIndicator()),
+              SizedBox(height: 20.0),
+              Center(child: Text("A Carregar Eventos...")),
+            ],
+          );
         }
       },
     );
