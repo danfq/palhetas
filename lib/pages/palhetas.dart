@@ -4,7 +4,6 @@ import 'package:get/route_manager.dart';
 import 'package:palhetas/pages/events/events.dart';
 import 'package:palhetas/pages/news/news.dart';
 import 'package:palhetas/pages/offline/offline.dart';
-import 'package:palhetas/pages/weather/weather.dart';
 import 'package:palhetas/util/data/constants.dart';
 import 'package:palhetas/util/widgets/main.dart';
 import 'package:url_launcher/url_launcher.dart';
