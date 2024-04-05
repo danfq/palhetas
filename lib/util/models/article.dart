@@ -111,6 +111,8 @@ class Article extends StatelessWidget {
                       Expanded(
                         child: Text(
                           title,
+                          maxLines: 3,
+                          overflow: TextOverflow.ellipsis,
                           style: const TextStyle(
                             fontWeight: FontWeight.bold,
                             fontSize: 16.0,

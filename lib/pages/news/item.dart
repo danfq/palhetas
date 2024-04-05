@@ -50,6 +50,15 @@ class _NewsItemState extends State<NewsItem> {
       appBar: MainWidgets.appBar(
         title: const Text("Artigo"),
         centerTitle: false,
+        onBack: () async {
+          //Stop TTS
+          if (ttsRunning) {
+            await TTSEngine.stop();
+          }
+
+          //Go Back
+          Get.back();
+        },
         actions: [
           //Offline
           Visibility(
@@ -121,7 +130,7 @@ class _NewsItemState extends State<NewsItem> {
                           widget.article.content,
                         ).parse();
 
-                        //Speak
+                        //Speak Content
                         await TTSEngine.speak(
                           text: parsedContent.body!.text,
                         );

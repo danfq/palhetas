@@ -81,43 +81,49 @@ class _PalhetasState extends State<Palhetas> {
         padding: const EdgeInsets.all(8.0),
         child: SafeArea(child: _body()),
       ),
-      bottomNavigationBar: BottomNavigationBar(
-        currentIndex: _navIndex,
-        onTap: (index) {
-          setState(() {
-            _navIndex = index;
-          });
-        },
-        unselectedItemColor: Theme.of(context).iconTheme.color,
-        selectedItemColor: Colors.blue,
-        items: const [
-          //Home
-          BottomNavigationBarItem(
-            icon: Padding(
-              padding: EdgeInsets.all(8.0),
-              child: Icon(Ionicons.ios_newspaper),
+      bottomNavigationBar: ClipRRect(
+        borderRadius: const BorderRadius.only(
+          topLeft: Radius.circular(20.0),
+          topRight: Radius.circular(20.0),
+        ),
+        child: BottomNavigationBar(
+          currentIndex: _navIndex,
+          onTap: (index) {
+            setState(() {
+              _navIndex = index;
+            });
+          },
+          unselectedItemColor: Theme.of(context).iconTheme.color,
+          selectedItemColor: Colors.blue,
+          items: const [
+            //Home
+            BottomNavigationBarItem(
+              icon: Padding(
+                padding: EdgeInsets.all(8.0),
+                child: Icon(Ionicons.ios_newspaper),
+              ),
+              label: "Notícias",
             ),
-            label: "Notícias",
-          ),
 
-          //Events
-          BottomNavigationBarItem(
-            icon: Padding(
-              padding: EdgeInsets.all(8.0),
-              child: Icon(FontAwesome5Solid.theater_masks),
+            //Events
+            BottomNavigationBarItem(
+              icon: Padding(
+                padding: EdgeInsets.all(8.0),
+                child: Icon(FontAwesome5Solid.theater_masks),
+              ),
+              label: "Eventos",
             ),
-            label: "Eventos",
-          ),
 
-          //Offline
-          BottomNavigationBarItem(
-            icon: Padding(
-              padding: EdgeInsets.all(8.0),
-              child: Icon(Ionicons.ios_cloud_offline),
+            //Offline
+            BottomNavigationBarItem(
+              icon: Padding(
+                padding: EdgeInsets.all(8.0),
+                child: Icon(Ionicons.ios_cloud_offline),
+              ),
+              label: "Ler Offline",
             ),
-            label: "Ler Offline",
-          ),
-        ],
+          ],
+        ),
       ),
     );
   }
