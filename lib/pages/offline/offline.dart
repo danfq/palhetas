@@ -57,6 +57,6 @@ class _OfflineState extends State<Offline> {
               );
             },
           )
-        : const Center(child: Text("Não Tens Artigos Guardados"));
+        : const Center(child: Text("Não Tem Artigos Guardados"));
   }
 }
