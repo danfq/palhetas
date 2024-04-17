@@ -31,13 +31,15 @@ dependencies:
   share_plus: ^7.2.2
   icons_launcher: ^2.1.7
   fast_cached_network_image: ^1.2.8
-  fluttertoast: ^8.2.4
+  fluttertoast: ^8.2.5
   url_launcher: ^6.2.5
   html: ^0.15.4
   download: ^1.0.0
   weather_pack: ^1.1.0
   flutter_tts: ^4.0.2
   html_parser_plus: ^0.1.4
+  supabase_flutter: ^2.5.0
+  flutter_dotenv: ^5.1.0
 
 dev_dependencies:
   flutter_test:
@@ -51,6 +53,9 @@ flutter:
 
   # Assets
   assets:
+
+    # Environment Variables
+    - .env
 
     # Animations
     - assets/anim/

@@ -22,15 +22,15 @@ class Intro extends StatelessWidget {
       //News
       PageViewModel(
         image: AnimationsHandler.asset(animation: "news"),
-        title: "Mantém-te A Par",
+        title: "Mantenha-se A Par",
         body: "Sempre que houver novidades, estarão disponíveis aqui.",
       ),
 
       //Share
       PageViewModel(
         image: AnimationsHandler.asset(animation: "share"),
-        title: "Partilha",
-        body: "Partilha os teus Artigos favoritos com amigos e família!",
+        title: "Partilhe",
+        body: "Partilhe os seus Artigos favoritos com amigos e família!",
       ),
     ];
 
