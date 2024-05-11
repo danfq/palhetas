@@ -3,6 +3,8 @@ PODS:
     - Flutter
   - audio_session (0.0.1):
     - Flutter
+  - background_fetch (1.3.4):
+    - Flutter
   - connectivity_plus (0.0.1):
     - Flutter
     - ReachabilitySwift
@@ -44,6 +46,7 @@ PODS:
 DEPENDENCIES:
   - app_links (from `.symlinks/plugins/app_links/ios`)
   - audio_session (from `.symlinks/plugins/audio_session/ios`)
+  - background_fetch (from `.symlinks/plugins/background_fetch/ios`)
   - connectivity_plus (from `.symlinks/plugins/connectivity_plus/ios`)
   - Flutter (from `Flutter`)
   - flutter_keyboard_visibility (from `.symlinks/plugins/flutter_keyboard_visibility/ios`)
@@ -70,6 +73,8 @@ EXTERNAL SOURCES:
     :path: ".symlinks/plugins/app_links/ios"
   audio_session:
     :path: ".symlinks/plugins/audio_session/ios"
+  background_fetch:
+    :path: ".symlinks/plugins/background_fetch/ios"
   connectivity_plus:
     :path: ".symlinks/plugins/connectivity_plus/ios"
   Flutter:
@@ -104,6 +109,7 @@ EXTERNAL SOURCES:
 SPEC CHECKSUMS:
   app_links: e70ca16b4b0f88253b3b3660200d4a10b4ea9795
   audio_session: 4f3e461722055d21515cf3261b64c973c062f345
+  background_fetch: d9364ca3f4ba37343c4ac1e8c24d4f4a93cb9ceb
   connectivity_plus: 413a8857dd5d9f1c399a39130850d02fe0feaf7e
   Flutter: e0871f40cf51350855a761d2e70bf5af5b9b5de7
   flutter_keyboard_visibility: 0339d06371254c3eb25eeb90ba8d17dca8f9c069
