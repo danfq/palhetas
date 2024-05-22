@@ -1,48 +1,28 @@
 import 'package:flutter/material.dart';
-import 'package:palhetas/util/data/news.dart';
+import 'package:palhetas/util/data/local.dart';
+import 'package:palhetas/util/models/article.dart';
 
 class News extends StatelessWidget {
   const News({super.key});
 
   @override
   Widget build(BuildContext context) {
-    return FutureBuilder(
-      future: NewsHandler.all(),
-      builder: (context, snapshot) {
-        //Connection State
-        if (snapshot.connectionState == ConnectionState.done) {
-          //News Articles
-          final articles = snapshot.data ?? [];
+    //Articles
+    final List articles = LocalData.boxData(box: "news")["list"];
 
-          //Check Articles
-          if (articles.isNotEmpty) {
-            //List of Articles
-            return ListView.builder(
-              physics: const BouncingScrollPhysics(),
-              itemCount: articles.length,
-              itemBuilder: (context, index) {
-                //Article
-                final article = articles[index];
+    //UI
+    return articles.isNotEmpty
+        ? ListView.builder(
+            physics: const BouncingScrollPhysics(),
+            itemCount: articles.length,
+            itemBuilder: (context, index) {
+              //Article
+              final article = Article.fromJSON(articles[index]);
 
-                //UI
-                return article;
-              },
-            );
-          } else {
-            return const Center(child: Text("Erro ao Obter Artigos"));
-          }
-        } else {
-          return const Column(
-            mainAxisSize: MainAxisSize.max,
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              Center(child: CircularProgressIndicator()),
-              SizedBox(height: 20.0),
-              Center(child: Text("A Carregar Notícias...")),
-            ],
-          );
-        }
-      },
-    );
+              //UI
+              return article;
+            },
+          )
+        : const Center(child: Text("Sem Notícias"));
   }
 }

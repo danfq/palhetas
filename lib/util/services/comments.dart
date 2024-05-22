@@ -6,7 +6,6 @@ import 'package:palhetas/pages/account/login.dart';
 import 'package:palhetas/pages/news/comment.dart';
 import 'package:palhetas/util/data/local.dart';
 import 'package:palhetas/util/models/comment.dart';
-import 'package:palhetas/util/notifications/toast.dart';
 import 'package:palhetas/util/services/users.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
 

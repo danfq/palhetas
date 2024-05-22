@@ -1,7 +1,6 @@
 import 'dart:io';
 import 'dart:typed_data';
 
-import 'package:download/download.dart';
 import 'package:html/parser.dart';
 import 'package:http/http.dart' as http;
 import 'package:palhetas/util/data/constants.dart';

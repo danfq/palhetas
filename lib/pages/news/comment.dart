@@ -4,7 +4,6 @@ import 'package:palhetas/util/data/local.dart';
 import 'package:palhetas/util/models/comment.dart';
 import 'package:palhetas/util/notifications/toast.dart';
 import 'package:palhetas/util/services/comments.dart';
-import 'package:palhetas/util/services/users.dart';
 import 'package:palhetas/util/widgets/main.dart';
 import 'package:uuid/uuid.dart';
 

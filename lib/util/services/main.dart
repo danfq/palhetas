@@ -4,6 +4,8 @@ import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:palhetas/pages/intro/intro.dart';
 import 'package:palhetas/pages/palhetas.dart';
 import 'package:palhetas/util/data/local.dart';
+import 'package:palhetas/util/services/fetch.dart';
+import 'package:palhetas/util/services/notifications.dart';
 import 'package:palhetas/util/services/tts.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
 
@@ -15,17 +17,32 @@ class MainServices {
   ///Initialize Main Services:
   ///
   ///- Widgets Binding.
+  ///- Local Data (Hive).
   ///- Cached Image Engine (FastCachedNetworkImage).
+  ///- Cache News Articles.
+  ///- Notifications Service.
+  ///- New Article Catcher (NewsFetch).
   ///- Environment Variables (DotEnv).
   ///- Remote Data (Supabase).
-  ///- Local Data (Hive).
   ///- TTS.
   static Future<void> init() async {
     //Ensure Widgets Binding is Initialized
     WidgetsFlutterBinding.ensureInitialized();
 
+    //Local Data
+    await LocalData.init();
+
     //Cached Image Engine - Cache for 7 Days
     await FastCachedImageConfig.init(clearCacheAfter: const Duration(days: 7));
+
+    //Cache News Articles
+    await NewsFetch.fetchAndCache();
+
+    //Notifications Service
+    await Notifications.setupService();
+
+    //Catch News Articles & Notify
+    await NewsFetch.setupBackgroundFetch();
 
     //Environment Variables
     await _dotEnv.load();
@@ -35,9 +52,6 @@ class MainServices {
       url: _dotEnv.get("SUPABASE_URL"),
       anonKey: _dotEnv.get("SUPABASE_KEY"),
     );
-
-    //Local Data
-    await LocalData.init();
 
     //TTS
     await TTSEngine.init();
