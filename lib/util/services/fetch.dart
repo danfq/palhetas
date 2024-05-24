@@ -69,6 +69,7 @@ class NewsFetch {
       (taskID) async {
         //Fetch News
         await _fetchInBackground();
+        debugPrint("[NEWS_FETCH] Fetched News.");
 
         //Finish
         await BackgroundFetch.finish(taskID);

@@ -10,7 +10,7 @@ class Notifications {
   ///Setup Notification Service
   static Future<void> setupService() async {
     //Android Init Settings
-    const androidSettings = AndroidInitializationSettings("ic_launcher");
+    const androidSettings = AndroidInitializationSettings("logo");
 
     //iOS Init Settings
     const iOSSettings = DarwinInitializationSettings();
