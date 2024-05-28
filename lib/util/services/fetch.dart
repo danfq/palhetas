@@ -32,6 +32,7 @@ class NewsFetch {
   ///Fetch In Background
   ///
   ///Returns Number of Fetched News
+  @pragma('vm:entry-point')
   static Future<void> _fetchInBackground() async {
     //Current News
     final currentNews = await _all;
@@ -65,19 +66,37 @@ class NewsFetch {
         stopOnTerminate: false,
         startOnBoot: true,
         enableHeadless: true,
+        requiredNetworkType: NetworkType.ANY,
       ),
       (taskID) async {
-        //Fetch News
-        await _fetchInBackground();
-        debugPrint("[NEWS_FETCH] Fetched News.");
+        //Attempt to Fetch News
+        try {
+          //Fetch News
+          debugPrint("[NEWS_FETCH] Fetching News...");
+          await _fetchInBackground();
+          debugPrint("[NEWS_FETCH] Fetched News.");
 
-        //Finish
-        await BackgroundFetch.finish(taskID);
+          //Finish
+          await BackgroundFetch.finish(taskID);
+        } catch (error) {
+          debugPrint("[NEWS_FETCH] ${error.toString()}");
+        }
       },
+      (taskID) => BackgroundFetch.finish(taskID),
     ).then((status) {
-      debugPrint("[NEWS_FETCH] Initialized.");
+      debugPrint("[NEWS_FETCH] Initialized | Status: $status.");
     }).catchError((error) {
       debugPrint("[NEWS_FETCH] Error: $error.");
     });
+
+    //Register Headless Task
+    await BackgroundFetch.registerHeadlessTask(_fetchInBackground).then(
+      (status) {
+        debugPrint("[NEWS_FETCH] Registered Headless Task: $status.");
+      },
+    );
+
+    //Start Task
+    await BackgroundFetch.start();
   }
 }

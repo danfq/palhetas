@@ -34,6 +34,10 @@
 	<array>
 		<string>fetch</string>
 	</array>
+	<key>BGTaskSchedulerPermittedIdentifiers</key>
+	<array>
+		<string>com.transistorsoft.fetch</string>
+	</array>
 	<key>NSAppTransportSecurity</key>
 	<dict>
 	<key>NSAllowsArbitraryLoads</key>

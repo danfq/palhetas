@@ -5,6 +5,7 @@ xmlns:tools="http://schemas.android.com/tools">
     <uses-permission android:name="android.permission.INTERNET"/>
     <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED"/>
     <uses-permission android:name="android.permission.FOREGROUND_SERVICE"/>
+    <uses-permission android:name="android.permission.WAKE_LOCK"/>
 
     <queries>
         <intent>
@@ -17,6 +18,16 @@ xmlns:tools="http://schemas.android.com/tools">
         android:label="O Palhetas"
         android:name="${applicationName}"
         android:icon="@mipmap/ic_launcher">
+
+        <receiver
+        android:name="com.transistorsoft.tsbackgroundfetch.BackgroundFetchHeadlessTask"
+        android:enabled="true"
+        android:exported="false"
+        android:permission="android.permission.BROADCAST_BACKGROUND_FETCH">
+            <intent-filter>
+                <action android:name="com.transistorsoft.backgroundfetch.BACKGROUND_FETCH" />
+            </intent-filter>
+        </receiver>
 
         <activity
             android:name=".MainActivity"
