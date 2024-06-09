@@ -179,11 +179,22 @@ class _NewsItemState extends State<NewsItem> {
       body: SafeArea(
         child: SingleChildScrollView(
           child: Column(
+            mainAxisAlignment: MainAxisAlignment.start,
+            crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               //Title
               MainWidgets.pageTitle(
                 title: widget.article.title,
                 textSize: 24.0,
+              ),
+
+              //Date
+              Padding(
+                padding: const EdgeInsets.all(14.0),
+                child: Text(
+                  "Publicado Em ${widget.article.publishDate}",
+                  style: const TextStyle(fontSize: 16.0),
+                ),
               ),
 
               //Content

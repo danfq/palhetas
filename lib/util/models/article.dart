@@ -62,7 +62,7 @@ class Article extends StatelessWidget {
       overview: json["overview"],
       content: json["content"],
       imageURL: json["imageURL"],
-      publishDate: json["publishDate"],
+      publishDate: (json["publishDate"] as String).split("T").first,
     );
   }
 
