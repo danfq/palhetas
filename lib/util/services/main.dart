@@ -1,3 +1,4 @@
+import 'package:connectivity_plus/connectivity_plus.dart';
 import 'package:fast_cached_network_image/fast_cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
@@ -14,12 +15,16 @@ class MainServices {
   ///DotEnv Instance
   static final DotEnv _dotEnv = DotEnv();
 
+  ///Connection Status
+  static Future<bool> connected() async =>
+      await Connectivity().checkConnectivity() != ConnectivityResult.none;
+
   ///Initialize Main Services:
   ///
   ///- Widgets Binding.
   ///- Local Data (Hive).
   ///- Cached Image Engine (FastCachedNetworkImage).
-  ///- Cache News Articles.
+  ///- Cache News Articles (If Online).
   ///- Notifications Service.
   ///- New Article Catcher (NewsFetch).
   ///- Environment Variables (DotEnv).
@@ -35,8 +40,10 @@ class MainServices {
     //Cached Image Engine - Cache for 7 Days
     await FastCachedImageConfig.init(clearCacheAfter: const Duration(days: 7));
 
-    //Cache News Articles
-    await NewsFetch.fetchAndCache();
+    //Cache News Articles - If Online
+    if (await connected()) {
+      await NewsFetch.fetchAndCache();
+    }
 
     //Notifications Service
     await Notifications.setupService();
