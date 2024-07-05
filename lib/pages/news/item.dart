@@ -1,3 +1,4 @@
+import 'dart:ui';
 import 'package:flutter/material.dart';
 import 'package:flutter_vector_icons/flutter_vector_icons.dart';
 import 'package:flutter_widget_from_html/flutter_widget_from_html.dart';
@@ -14,7 +15,7 @@ import 'package:share_plus/share_plus.dart';
 class NewsItem extends StatefulWidget {
   const NewsItem({super.key, required this.article});
 
-  ///Article
+  /// Article
   final Article article;
 
   @override
@@ -22,27 +23,15 @@ class NewsItem extends StatefulWidget {
 }
 
 class _NewsItemState extends State<NewsItem> {
-  ///Offline News Items
+  /// Offline News Items
   final offlineNews = LocalData.boxData(box: "offline")["items"] ?? [];
 
-  ///Check if Item is in Offline News
+  /// Check if Item is in Offline News
   bool checkIfOffline() {
-    //Status
-    bool isAlreadyPresent = false;
-
-    //Check
-    for (var item in offlineNews) {
-      if (item["id"] == widget.article.id) {
-        isAlreadyPresent = true;
-        break;
-      }
-    }
-
-    //Return Status
-    return isAlreadyPresent;
+    return offlineNews.any((item) => item["id"] == widget.article.id);
   }
 
-  ///Check if TTS is Running
+  /// Check if TTS is Running
   bool ttsRunning = false;
 
   @override
@@ -52,22 +41,22 @@ class _NewsItemState extends State<NewsItem> {
         title: const Text("Artigo"),
         centerTitle: false,
         onBack: () async {
-          //Stop TTS
+          // Stop TTS
           if (ttsRunning) {
             await TTSEngine.stop();
           }
 
-          //Go Back
+          // Go Back
           Get.back();
         },
         actions: [
-          //Offline
+          // Offline
           Visibility(
             visible: !checkIfOffline(),
             child: IconButton(
               icon: const Icon(Ionicons.ios_cloud_offline_outline),
               onPressed: () async {
-                //Confirmation
+                // Confirmation
                 await Get.defaultDialog(
                   title: "Guardar Offline",
                   content: const Text("Guardar para ler offline?"),
@@ -78,10 +67,10 @@ class _NewsItemState extends State<NewsItem> {
                   confirm: ElevatedButton(
                     onPressed: () async {
                       if (!checkIfOffline()) {
-                        //Add if Not Present
+                        // Add if Not Present
                         offlineNews.add(widget.article.toJSON());
 
-                        //Save New List
+                        // Save New List
                         await LocalData.updateValue(
                           box: "offline",
                           item: "items",
@@ -90,12 +79,12 @@ class _NewsItemState extends State<NewsItem> {
 
                         Get.back();
 
-                        //Notify User
+                        // Notify User
                         LocalNotifications.toast(message: "Guardado!");
                       } else {
                         Get.back();
 
-                        //Notify User
+                        // Notify User
                         LocalNotifications.toast(message: "Já está guardado!");
                       }
                     },
@@ -106,12 +95,12 @@ class _NewsItemState extends State<NewsItem> {
             ),
           ),
 
-          //Text-to-Speech
+          // Text-to-Speech
           IconButton(
             onPressed: () async {
-              //Check if Running
+              // Check if Running
               if (!ttsRunning) {
-                //Confirm
+                // Confirm
                 await Get.defaultDialog(
                   title: "Ouvir Notícia?",
                   content: const Text(
@@ -124,19 +113,19 @@ class _NewsItemState extends State<NewsItem> {
                   ),
                   confirm: ElevatedButton(
                     onPressed: () async {
-                      //Speak Article
+                      // Speak Article
                       if (widget.article.content.isNotEmpty) {
-                        //Parse Content
+                        // Parse Content
                         final parsedContent = HtmlParser(
                           widget.article.content,
                         ).parse();
 
-                        //Speak Content
+                        // Speak Content
                         await TTSEngine.speak(
                           text: parsedContent.body!.text,
                         );
 
-                        //Start TTS
+                        // Start TTS
                         setState(() {
                           ttsRunning = true;
                         });
@@ -148,7 +137,7 @@ class _NewsItemState extends State<NewsItem> {
                   ),
                 );
               } else {
-                //Stop TTS
+                // Stop TTS
                 setState(() {
                   ttsRunning = false;
                 });
@@ -163,13 +152,13 @@ class _NewsItemState extends State<NewsItem> {
             ),
           ),
 
-          //Share
+          // Share
           Padding(
             padding: const EdgeInsets.only(right: 10.0),
             child: IconButton(
               icon: const Icon(Ionicons.ios_share_outline),
               onPressed: () async {
-                //Share Article
+                // Share Article
                 await Share.share(widget.article.url);
               },
             ),
@@ -182,13 +171,13 @@ class _NewsItemState extends State<NewsItem> {
             mainAxisAlignment: MainAxisAlignment.start,
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              //Title
+              // Title
               MainWidgets.pageTitle(
                 title: widget.article.title,
                 textSize: 24.0,
               ),
 
-              //Date
+              // Date
               Padding(
                 padding: const EdgeInsets.all(14.0),
                 child: Text(
@@ -197,10 +186,23 @@ class _NewsItemState extends State<NewsItem> {
                 ),
               ),
 
-              //Content
+              // Content
               Padding(
                 padding: const EdgeInsets.all(14.0),
-                child: HtmlWidget(widget.article.content),
+                child: HtmlWidget(
+                  widget.article.content,
+                  onTapImage: (imageData) async {
+                    await showDialog(
+                      context: context,
+                      barrierDismissible: true,
+                      builder: (context) {
+                        return BlurredBackgroundDialog(
+                          imageUrl: imageData.sources.first.url,
+                        );
+                      },
+                    );
+                  },
+                ),
               ),
             ],
           ),
@@ -210,7 +212,7 @@ class _NewsItemState extends State<NewsItem> {
         padding: const EdgeInsets.all(40.0),
         child: ElevatedButton.icon(
           onPressed: () async {
-            //Show Comment Sheet
+            // Show Comment Sheet
             await CommentsHandler.showComments(postID: widget.article.id);
           },
           icon: const Padding(
@@ -222,6 +224,53 @@ class _NewsItemState extends State<NewsItem> {
             style: TextStyle(fontWeight: FontWeight.bold),
           ),
         ),
+      ),
+    );
+  }
+}
+
+/// Blurred Background Dialog
+class BlurredBackgroundDialog extends StatelessWidget {
+  const BlurredBackgroundDialog({super.key, required this.imageUrl});
+
+  /// Image URL
+  final String imageUrl;
+
+  @override
+  Widget build(BuildContext context) {
+    return GestureDetector(
+      onTap: () => Navigator.of(context).pop(),
+      child: Stack(
+        children: [
+          //Blurred Background
+          Positioned.fill(
+            child: TweenAnimationBuilder<double>(
+              tween: Tween<double>(begin: 0.0, end: 4.0),
+              duration: const Duration(milliseconds: 300),
+              builder: (context, value, child) {
+                return BackdropFilter(
+                  filter: ImageFilter.blur(sigmaX: value, sigmaY: value),
+                  child: Container(
+                    color: Colors.black.withOpacity(0.2),
+                  ),
+                );
+              },
+            ),
+          ),
+
+          //Dialog
+          Center(
+            child: GestureDetector(
+              onTap: () {},
+              child: Card(
+                child: Padding(
+                  padding: const EdgeInsets.all(20.0),
+                  child: Image.network(imageUrl),
+                ),
+              ),
+            ),
+          ),
+        ],
       ),
     );
   }

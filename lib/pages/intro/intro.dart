@@ -35,24 +35,28 @@ class Intro extends StatelessWidget {
     ];
 
     //UI
-    return IntroductionScreen(
-      pages: pages,
-      showBackButton: true,
-      showNextButton: true,
-      showDoneButton: true,
-      back: const Text("Back"),
-      next: const Text("Next"),
-      done: const Text(
-        "Vamos!",
-        style: TextStyle(fontWeight: FontWeight.bold),
+    return Scaffold(
+      body: SafeArea(
+        child: IntroductionScreen(
+          pages: pages,
+          showBackButton: true,
+          showNextButton: true,
+          showDoneButton: true,
+          back: const Text("Back"),
+          next: const Text("Next"),
+          done: const Text(
+            "Vamos!",
+            style: TextStyle(fontWeight: FontWeight.bold),
+          ),
+          onDone: () async {
+            //Set Intro as Done
+            await LocalData.setData(box: "intro", data: {"status": true}).then(
+              //Go Home
+              (_) => Get.offAll(() => const Palhetas()),
+            );
+          },
+        ),
       ),
-      onDone: () async {
-        //Set Intro as Done
-        await LocalData.setData(box: "intro", data: {"status": true}).then(
-          //Go Home
-          (_) => Get.offAll(() => const Palhetas()),
-        );
-      },
     );
   }
 }

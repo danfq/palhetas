@@ -47,35 +47,6 @@ class _PalhetasState extends State<Palhetas> {
         title: const Text("O Palhetas na Foz"),
         allowBack: false,
         centerTitle: false,
-        actions: [
-          Padding(
-            padding: const EdgeInsets.only(right: 10.0),
-            child: IconButton(
-              onPressed: () async {
-                await Get.defaultDialog(
-                  title: "O Palhetas na Foz",
-                  content: const Padding(
-                    padding: EdgeInsets.all(8.0),
-                    child: Text(
-                      "Esta App foi publicada com a autorização prévia de António Flórido - autor de todos os Artigos.",
-                    ),
-                  ),
-                  confirm: ElevatedButton(
-                    onPressed: () async {
-                      Get.back();
-                      await launchUrl(Uri.parse(Constants.blog));
-                    },
-                    style: ElevatedButton.styleFrom(
-                      backgroundColor: Theme.of(context).cardColor,
-                    ),
-                    child: const Text("Ver Blog"),
-                  ),
-                );
-              },
-              icon: const Icon(Ionicons.ios_information_circle_outline),
-            ),
-          ),
-        ],
       ),
       body: Padding(
         padding: const EdgeInsets.all(8.0),
