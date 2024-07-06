@@ -48,7 +48,7 @@ class MainServices {
     //Notifications Service
     await Notifications.setupService();
 
-    //Catch News Articles & Notify
+    //Get News Articles & Notify
     await NewsFetch.setupBackgroundFetch();
 
     //Environment Variables

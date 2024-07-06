@@ -65,7 +65,6 @@ class _PalhetasState extends State<Palhetas> {
             });
           },
           unselectedItemColor: Theme.of(context).iconTheme.color,
-          selectedItemColor: Colors.blue,
           items: const [
             //Home
             BottomNavigationBarItem(

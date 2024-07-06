@@ -33,7 +33,7 @@ class NewsFetch {
   ///
   ///Returns Number of Fetched News
   @pragma('vm:entry-point')
-  static Future<void> _fetchInBackground() async {
+  static Future<void> fetchInBackground() async {
     //Current News
     final currentNews = await _all;
 
@@ -73,7 +73,7 @@ class NewsFetch {
         try {
           //Fetch News
           debugPrint("[NEWS_FETCH] Fetching News...");
-          await _fetchInBackground();
+          await fetchInBackground();
           debugPrint("[NEWS_FETCH] Fetched News.");
 
           //Finish
@@ -90,7 +90,7 @@ class NewsFetch {
     });
 
     //Register Headless Task
-    await BackgroundFetch.registerHeadlessTask(_fetchInBackground).then(
+    await BackgroundFetch.registerHeadlessTask(fetchInBackground).then(
       (status) {
         debugPrint("[NEWS_FETCH] Registered Headless Task: $status.");
       },
