@@ -1,4 +1,7 @@
+import 'dart:async';
+
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_vector_icons/flutter_vector_icons.dart';
 import 'package:get/route_manager.dart';
 import 'package:palhetas/pages/events/events.dart';
@@ -6,6 +9,7 @@ import 'package:palhetas/pages/news/news.dart';
 import 'package:palhetas/pages/offline/offline.dart';
 import 'package:palhetas/util/data/constants.dart';
 import 'package:palhetas/util/widgets/main.dart';
+import 'package:uni_links/uni_links.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 class Palhetas extends StatefulWidget {
@@ -38,6 +42,67 @@ class _PalhetasState extends State<Palhetas> {
       default:
         return Container();
     }
+  }
+
+  ///Stream Subscription
+  StreamSubscription? _sub;
+
+  ///Initialize UniLinks
+  Future<void> initUniLinks() async {
+    // Initial Link
+    try {
+      final initialLink = await getInitialLink();
+      if (initialLink != null) {
+        handleIncomingLink(initialLink);
+      }
+    } on PlatformException {
+      debugPrint("Failed to get initial link");
+    }
+
+    // Subsequent Links
+    _sub = linkStream.listen((String? link) {
+      if (link != null) {
+        handleIncomingLink(link);
+      }
+    }, onError: (err) {
+      debugPrint("Error in linkStream: $err");
+    });
+  }
+
+  ///Handle Incoming Link
+  void handleIncomingLink(String link) {
+    //Article ID
+    final articleID = extractArticleIDFromLink(link);
+
+    if (articleID != null) {
+      Get.toNamed("/article", arguments: {"articleID": articleID});
+    }
+  }
+
+  ///Extract Article ID
+  String? extractArticleIDFromLink(String link) {
+    try {
+      final uri = Uri.parse(link);
+      final pathSegments = uri.pathSegments;
+      if (pathSegments.length >= 3) {
+        return pathSegments[pathSegments.length - 1];
+      }
+    } catch (error) {
+      debugPrint("Error Extracting Article ID: $error");
+    }
+    return null;
+  }
+
+  @override
+  void initState() {
+    super.initState();
+    initUniLinks();
+  }
+
+  @override
+  void dispose() {
+    _sub?.cancel();
+    super.dispose();
   }
 
   @override
