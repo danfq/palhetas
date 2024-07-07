@@ -1,8 +1,7 @@
 import 'package:fast_cached_network_image/fast_cached_network_image.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
-import 'package:palhetas/pages/news/item.dart';
+import 'package:get/route_manager.dart';
 import 'package:palhetas/util/data/constants.dart';
 
 ///Article
@@ -72,14 +71,7 @@ class Article extends StatelessWidget {
       padding: const EdgeInsets.all(10.0),
       child: InkWell(
         borderRadius: BorderRadius.circular(14.0),
-        onTap: () {
-          Navigator.push(
-            context,
-            CupertinoPageRoute(
-              builder: (context) => NewsItem(article: this),
-            ),
-          );
-        },
+        onTap: () => Get.toNamed("/article/$id"),
         child: Padding(
           padding: const EdgeInsets.all(4.0),
           child: Row(

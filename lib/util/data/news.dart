@@ -26,7 +26,7 @@ class NewsHandler {
       for (final item in unparsedItems) {
         //Article
         final article = Article(
-          id: item.id!,
+          id: item.links?.last.href?.split(".com").last ?? "",
           url: item.links?.last.href ?? "",
           title: item.title ?? "",
           overview: item.content?.split(".").first ?? "", //First Sentence
@@ -42,5 +42,24 @@ class NewsHandler {
 
     //Return Articles
     return articles;
+  }
+
+  ///Get Article by ID
+  static Future<Article?> articleFromID({required String articleID}) async {
+    //Article
+    Article? article;
+
+    //All News
+    final allNews = await all();
+
+    //Check for Matching ID
+    for (final item in allNews) {
+      if (item.id == articleID) {
+        article = item;
+      }
+    }
+
+    //Return Article
+    return article;
   }
 }

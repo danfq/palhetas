@@ -1,6 +1,10 @@
 import 'package:adaptive_theme/adaptive_theme.dart';
 import 'package:flutter/material.dart';
 import 'package:get/route_manager.dart';
+import 'package:palhetas/pages/events/events.dart';
+import 'package:palhetas/pages/intro/intro.dart';
+import 'package:palhetas/pages/news/item.dart';
+import 'package:palhetas/pages/palhetas.dart';
 import 'package:palhetas/util/services/main.dart';
 import 'package:palhetas/util/theming/themes.dart';
 
@@ -22,7 +26,17 @@ void main() async {
           debugShowCheckedModeBanner: false,
           theme: light,
           darkTheme: dark,
-          home: initialRoute,
+          getPages: [
+            GetPage(name: "/", page: () => const Palhetas()),
+            GetPage(name: "/intro", page: () => const Intro()),
+            GetPage(
+              name: "/article/:id",
+              page: () => NewsItem(
+                articleID: Get.parameters["id"]!,
+              ),
+            ),
+          ],
+          initialRoute: initialRoute,
         );
       },
     ),

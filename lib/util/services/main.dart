@@ -65,11 +65,11 @@ class MainServices {
   }
 
   ///Initial Route
-  static Future<Widget> initialRoute() async {
+  static Future<String> initialRoute() async {
     //Intro Status
     final bool introStatus = LocalData.boxData(box: "intro")["status"] ?? false;
 
     //Return Initial Route
-    return introStatus ? const Palhetas() : const Intro();
+    return introStatus ? "/" : "/intro";
   }
 }
