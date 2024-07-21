@@ -8,7 +8,6 @@ import 'package:palhetas/util/data/local.dart';
 import 'package:palhetas/util/data/news.dart';
 import 'package:palhetas/util/models/article.dart';
 import 'package:palhetas/util/notifications/toast.dart';
-import 'package:palhetas/util/services/comments.dart';
 import 'package:palhetas/util/services/tts.dart';
 import 'package:palhetas/util/widgets/main.dart';
 import 'package:share_plus/share_plus.dart';
@@ -235,23 +234,6 @@ class _NewsItemState extends State<NewsItem> {
                         ),
                       ),
                     ],
-                  ),
-                ),
-              ),
-              bottomNavigationBar: Padding(
-                padding: const EdgeInsets.all(40.0),
-                child: ElevatedButton.icon(
-                  onPressed: () async {
-                    // Show Comment Sheet
-                    await CommentsHandler.showComments(postID: article.id);
-                  },
-                  icon: const Padding(
-                    padding: EdgeInsets.all(8.0),
-                    child: Icon(Fontisto.comments),
-                  ),
-                  label: const Text(
-                    "Comentários",
-                    style: TextStyle(fontWeight: FontWeight.bold),
                   ),
                 ),
               ),
