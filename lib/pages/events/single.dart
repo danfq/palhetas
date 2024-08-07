@@ -1,3 +1,4 @@
+import 'package:drop_shadow/drop_shadow.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_vector_icons/flutter_vector_icons.dart';
 import 'package:palhetas/util/data/events.dart';
@@ -13,6 +14,7 @@ class SingleEvent extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: MainWidgets.appBar(
+        title: const Text("Evento"),
         actions: [
           Padding(
             padding: const EdgeInsets.only(right: 10.0),
@@ -32,12 +34,14 @@ class SingleEvent extends StatelessWidget {
             padding: const EdgeInsets.all(20.0),
             child: Hero(
               tag: imageURL,
-              child: ClipRRect(
-                borderRadius: BorderRadius.circular(14.0),
-                child: Image.network(
-                  imageURL,
-                  fit: BoxFit.cover,
-                  filterQuality: FilterQuality.high,
+              child: DropShadow(
+                child: ClipRRect(
+                  borderRadius: BorderRadius.circular(14.0),
+                  child: Image.network(
+                    imageURL,
+                    fit: BoxFit.cover,
+                    filterQuality: FilterQuality.high,
+                  ),
                 ),
               ),
             ),

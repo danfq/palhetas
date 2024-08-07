@@ -241,6 +241,14 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "1.0.0"
+  drop_shadow:
+    dependency: "direct main"
+    description:
+      name: drop_shadow
+      sha256: "1fa552baeb7c6a3c36a7ff77186a2302a7bf53c93914f46328a9c4eb68ec6b08"
+      url: "https://pub.dev"
+    source: hosted
+    version: "0.1.0"
   expressions:
     dependency: transitive
     description:
@@ -390,6 +398,14 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "7.1.0"
+  flutter_slidable:
+    dependency: "direct main"
+    description:
+      name: flutter_slidable
+      sha256: "2c5611c0b44e20d180e4342318e1bbc28b0a44ad2c442f5df16962606fd3e8e3"
+      url: "https://pub.dev"
+    source: hosted
+    version: "3.1.1"
   flutter_svg:
     dependency: "direct main"
     description:
@@ -952,6 +968,14 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "0.27.7"
+  salomon_bottom_bar:
+    dependency: "direct main"
+    description:
+      name: salomon_bottom_bar
+      sha256: e20abf2e449749432223a8b4e6647c212eef6c2b638e0ed8cc92eff9529c2b48
+      url: "https://pub.dev"
+    source: hosted
+    version: "3.3.2"
   share_plus:
     dependency: "direct main"
     description:
@@ -1029,6 +1053,14 @@ packages:
     description: flutter
     source: sdk
     version: "0.0.99"
+  smooth_page_indicator:
+    dependency: "direct main"
+    description:
+      name: smooth_page_indicator
+      sha256: "3b28b0c545fa67ed9e5997d9f9720d486f54c0c607e056a1094544e36934dff3"
+      url: "https://pub.dev"
+    source: hosted
+    version: "1.2.0+3"
   source_span:
     dependency: transitive
     description:

@@ -23,15 +23,15 @@ class NewsItem extends StatefulWidget {
 }
 
 class _NewsItemState extends State<NewsItem> {
-  /// Offline News Items
+  ///Offline News Items
   final offlineNews = LocalData.boxData(box: "offline")["items"] ?? [];
 
-  /// Check if Item is in Offline News
+  ///Check if Item is in Offline News
   bool checkIfOffline() {
     return offlineNews.any((item) => item["id"] == widget.articleID);
   }
 
-  /// Fetch Article from Offline Storage
+  ///Fetch Article from Offline Storage
   Article? fetchOfflineArticle() {
     final articleData = offlineNews.firstWhere(
         (item) => item["id"] == widget.articleID,
@@ -42,7 +42,7 @@ class _NewsItemState extends State<NewsItem> {
     return null;
   }
 
-  /// Get Article
+  ///Get Article
   Future<Article?> getArticle() async {
     if (checkIfOffline()) {
       return fetchOfflineArticle();
@@ -51,7 +51,7 @@ class _NewsItemState extends State<NewsItem> {
     }
   }
 
-  /// Check if TTS is Running
+  ///Check if TTS is Running
   bool ttsRunning = false;
 
   @override
@@ -59,34 +59,34 @@ class _NewsItemState extends State<NewsItem> {
     return FutureBuilder<Article?>(
       future: getArticle(),
       builder: (context, snapshot) {
-        // Connection State
+        //Connection State
         if (snapshot.connectionState == ConnectionState.done) {
-          // Article
+          //Article
           final article = snapshot.data;
 
-          // Check Article
+          //Check Article
           if (article != null) {
             return Scaffold(
               appBar: MainWidgets.appBar(
                 title: const Text("Artigo"),
                 centerTitle: false,
                 onBack: () async {
-                  // Stop TTS
+                  //Stop TTS
                   if (ttsRunning) {
                     await TTSEngine.stop();
                   }
 
-                  // Go Back
+                  //Go Back
                   Get.back();
                 },
                 actions: [
-                  // Offline
+                  //Offline
                   Visibility(
                     visible: !checkIfOffline(),
                     child: IconButton(
                       icon: const Icon(Ionicons.ios_cloud_offline_outline),
                       onPressed: () async {
-                        // Confirmation
+                        //Confirmation
                         await Get.defaultDialog(
                           title: "Guardar Offline",
                           content: const Text("Guardar para ler offline?"),
@@ -97,10 +97,10 @@ class _NewsItemState extends State<NewsItem> {
                           confirm: ElevatedButton(
                             onPressed: () async {
                               if (!checkIfOffline()) {
-                                // Add if Not Present
+                                //Add if Not Present
                                 offlineNews.add(article.toJSON());
 
-                                // Save New List
+                                //Save New List
                                 await LocalData.updateValue(
                                   box: "offline",
                                   item: "items",
@@ -109,14 +109,15 @@ class _NewsItemState extends State<NewsItem> {
 
                                 Get.back();
 
-                                // Notify User
+                                //Notify User
                                 LocalNotifications.toast(message: "Guardado!");
                               } else {
                                 Get.back();
 
-                                // Notify User
+                                //Notify User
                                 LocalNotifications.toast(
-                                    message: "Já está guardado!");
+                                  message: "Já está guardado!",
+                                );
                               }
                             },
                             child: const Text("Guardar"),
@@ -126,70 +127,61 @@ class _NewsItemState extends State<NewsItem> {
                     ),
                   ),
 
-                  // Text-to-Speech
-                  IconButton(
-                    onPressed: () async {
-                      // Check if Running
-                      if (!ttsRunning) {
-                        // Confirm
-                        await Get.defaultDialog(
-                          title: "Ouvir Notícia?",
-                          content: const Text(
-                            "Para desligar, basta tocar no mesmo botão.",
-                          ),
-                          contentPadding: const EdgeInsets.all(14.0),
-                          cancel: TextButton(
-                            onPressed: () => Get.back(),
-                            child: const Text("Cancelar"),
-                          ),
-                          confirm: ElevatedButton(
-                            onPressed: () async {
-                              // Speak Article
-                              if (article.content.isNotEmpty) {
-                                // Parse Content
-                                final parsedContent =
-                                    HtmlParser(article.content).parse();
-
-                                // Speak Content
-                                await TTSEngine.speak(
-                                    text: parsedContent.body!.text);
-
-                                // Start TTS
-                                setState(() {
-                                  ttsRunning = true;
-                                });
-                              }
-
-                              Get.back();
-                            },
-                            child: const Text("Confirmar"),
-                          ),
-                        );
-                      } else {
-                        // Stop TTS
-                        setState(() {
-                          ttsRunning = false;
-                        });
-
-                        await TTSEngine.stop();
-                      }
-                    },
-                    icon: Icon(
-                      ttsRunning
-                          ? MaterialCommunityIcons.text_to_speech_off
-                          : MaterialCommunityIcons.text_to_speech,
-                    ),
-                  ),
-
-                  // Share
+                  //Text-to-Speech
                   Padding(
                     padding: const EdgeInsets.only(right: 10.0),
                     child: IconButton(
-                      icon: const Icon(Ionicons.ios_share_outline),
                       onPressed: () async {
-                        // Share Article
-                        await Share.share(article.url);
+                        //Check if Running
+                        if (!ttsRunning) {
+                          //Confirm
+                          await Get.defaultDialog(
+                            title: "Ouvir Notícia?",
+                            content: const Text(
+                              "Para desligar, basta tocar no mesmo botão.",
+                            ),
+                            contentPadding: const EdgeInsets.all(14.0),
+                            cancel: TextButton(
+                              onPressed: () => Get.back(),
+                              child: const Text("Cancelar"),
+                            ),
+                            confirm: ElevatedButton(
+                              onPressed: () async {
+                                //Speak Article
+                                if (article.content.isNotEmpty) {
+                                  //Parse Content
+                                  final parsedContent =
+                                      HtmlParser(article.content).parse();
+
+                                  //Speak Content
+                                  await TTSEngine.speak(
+                                      text: parsedContent.body!.text);
+
+                                  //Start TTS
+                                  setState(() {
+                                    ttsRunning = true;
+                                  });
+                                }
+
+                                Get.back();
+                              },
+                              child: const Text("Confirmar"),
+                            ),
+                          );
+                        } else {
+                          //Stop TTS
+                          setState(() {
+                            ttsRunning = false;
+                          });
+
+                          await TTSEngine.stop();
+                        }
                       },
+                      icon: Icon(
+                        ttsRunning
+                            ? MaterialCommunityIcons.text_to_speech_off
+                            : MaterialCommunityIcons.text_to_speech,
+                      ),
                     ),
                   ),
                 ],
@@ -200,13 +192,13 @@ class _NewsItemState extends State<NewsItem> {
                     mainAxisAlignment: MainAxisAlignment.start,
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      // Title
+                      //Title
                       MainWidgets.pageTitle(
                         title: article.title,
                         textSize: 24.0,
                       ),
 
-                      // Date
+                      //Date
                       Padding(
                         padding: const EdgeInsets.all(14.0),
                         child: Text(
@@ -215,7 +207,7 @@ class _NewsItemState extends State<NewsItem> {
                         ),
                       ),
 
-                      // Content
+                      //Content
                       Padding(
                         padding: const EdgeInsets.all(14.0),
                         child: HtmlWidget(
