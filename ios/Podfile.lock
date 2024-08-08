@@ -25,7 +25,7 @@ PODS:
   - path_provider_foundation (0.0.1):
     - Flutter
     - FlutterMacOS
-  - ReachabilitySwift (5.0.0)
+  - ReachabilitySwift (5.2.3)
   - share_plus (0.0.1):
     - Flutter
   - shared_preferences_foundation (0.0.1):
@@ -34,7 +34,7 @@ PODS:
   - sqflite (0.0.3):
     - Flutter
     - FlutterMacOS
-  - Toast (4.1.0)
+  - Toast (4.1.1)
   - uni_links (0.0.1):
     - Flutter
   - url_launcher_ios (0.0.1):
@@ -129,11 +129,11 @@ SPEC CHECKSUMS:
   just_audio: baa7252489dbcf47a4c7cc9ca663e9661c99aafa
   package_info_plus: 58f0028419748fad15bf008b270aaa8e54380b1c
   path_provider_foundation: 2b6b4c569c0fb62ec74538f866245ac84301af46
-  ReachabilitySwift: 985039c6f7b23a1da463388634119492ff86c825
+  ReachabilitySwift: 7f151ff156cea1481a8411701195ac6a984f4979
   share_plus: c3fef564749587fc939ef86ffb283ceac0baf9f5
   shared_preferences_foundation: fcdcbc04712aee1108ac7fda236f363274528f78
   sqflite: 673a0e54cc04b7d6dba8d24fb8095b31c3a99eec
-  Toast: ec33c32b8688982cecc6348adeae667c1b9938da
+  Toast: 1f5ea13423a1e6674c4abdac5be53587ae481c4e
   uni_links: d97da20c7701486ba192624d99bffaaffcfc298a
   url_launcher_ios: 5334b05cef931de560670eeae103fd3e431ac3fe
   video_player_avfoundation: 7c6c11d8470e1675df7397027218274b6d2360b3
