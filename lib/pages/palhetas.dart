@@ -7,11 +7,9 @@ import 'package:get/route_manager.dart';
 import 'package:palhetas/pages/events/events.dart';
 import 'package:palhetas/pages/news/news.dart';
 import 'package:palhetas/pages/offline/offline.dart';
-import 'package:palhetas/util/data/constants.dart';
 import 'package:palhetas/util/widgets/main.dart';
 import 'package:salomon_bottom_bar/salomon_bottom_bar.dart';
 import 'package:uni_links/uni_links.dart';
-import 'package:url_launcher/url_launcher.dart';
 
 class Palhetas extends StatefulWidget {
   const Palhetas({super.key});

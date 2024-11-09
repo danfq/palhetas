@@ -6,15 +6,44 @@ import 'package:palhetas/util/logging/handler.dart';
 import 'package:palhetas/util/models/article.dart';
 import 'package:palhetas/util/services/notifications.dart';
 
+///Fetch In Background
+@pragma("vm:entry-point")
+Future<void> fetchInBackground() async {
+  //Current News
+  final currentNews = await NewsFetch.all;
+
+  //Initialize Local Data
+  await LocalData.init();
+
+  //Saved News
+  final List<Map<dynamic, dynamic>> savedNews =
+      LocalData.boxData(box: "news")["list"];
+
+  //Parsed Saved News Articles IDs
+  final Set<String> savedNewsIDs =
+      savedNews.map((article) => article["id"] as String).toSet();
+
+  //Compare IDs
+  for (final article in currentNews) {
+    if (!savedNewsIDs.contains(article.id)) {
+      //New Article Posted - Send Notification
+      await Notifications.sendNotification(
+        title: "Nova Notícia",
+        body: article.title,
+      );
+    }
+  }
+}
+
 ///News Fetch Handler
 class NewsFetch {
   ///All News
-  static Future<List<Article>> get _all async => await NewsHandler.all();
+  static Future<List<Article>> get all async => await NewsHandler.all();
 
   ///Fetch & Cache Articles
   static Future<void> fetchAndCache() async {
     //All
-    final allNews = await _all;
+    final allNews = await all;
 
     //Cache Articles
     await LocalData.updateValue(
@@ -27,34 +56,6 @@ class NewsFetch {
       message: "[NEWS] Found ${allNews.length} Articles",
       level: LogLevel.info,
     );
-  }
-
-  ///Fetch In Background
-  ///
-  ///Returns Number of Fetched News
-  @pragma('vm:entry-point')
-  static Future<void> fetchInBackground() async {
-    //Current News
-    final currentNews = await _all;
-
-    //Saved News
-    final List<Map<dynamic, dynamic>> savedNews =
-        LocalData.boxData(box: "news")["list"];
-
-    //Parsed Saved News Articles IDs
-    final Set<String> savedNewsIDs =
-        savedNews.map((article) => article["id"] as String).toSet();
-
-    //Compare IDs
-    for (final article in currentNews) {
-      if (!savedNewsIDs.contains(article.id)) {
-        //New Article Posted - Send Notification
-        await Notifications.sendNotification(
-          title: "Nova Notícia",
-          body: article.title,
-        );
-      }
-    }
   }
 
   ///Setup Background Fetch

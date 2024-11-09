@@ -1,7 +1,6 @@
 import 'package:adaptive_theme/adaptive_theme.dart';
 import 'package:flutter/material.dart';
 import 'package:get/route_manager.dart';
-import 'package:palhetas/pages/events/events.dart';
 import 'package:palhetas/pages/intro/intro.dart';
 import 'package:palhetas/pages/news/item.dart';
 import 'package:palhetas/pages/palhetas.dart';

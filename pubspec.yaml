@@ -32,16 +32,14 @@ dependencies:
   icons_launcher: ^2.1.7
   fast_cached_network_image: ^1.2.8
   fluttertoast: ^8.2.5
-  url_launcher: ^6.2.5
+  url_launcher: ^6.3.1
   html: ^0.15.4
   download: ^1.0.0
   weather_pack: ^1.1.0
   flutter_tts: ^4.0.2
   html_parser_plus: ^0.1.4
-  supabase_flutter: ^2.5.0
-  flutter_dotenv: ^5.1.0
   background_fetch: ^1.3.4
-  carousel_slider: ^4.2.1
+  carousel_slider: ^5.0.0
   flutter_local_notifications: ^17.1.2
   logger: ^2.3.0
   uni_links: ^0.5.1
@@ -49,6 +47,8 @@ dependencies:
   drop_shadow: ^0.1.0
   flutter_slidable: ^3.1.1
   smooth_page_indicator: ^1.2.0+3
+  workmanager: ^0.5.2
+  permission_handler: ^11.3.1
 
 dev_dependencies:
   flutter_test:
@@ -62,9 +62,6 @@ flutter:
 
   # Assets
   assets:
-
-    # Environment Variables
-    - .env
 
     # Animations
     - assets/anim/

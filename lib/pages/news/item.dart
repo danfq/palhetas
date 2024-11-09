@@ -10,7 +10,6 @@ import 'package:palhetas/util/models/article.dart';
 import 'package:palhetas/util/notifications/toast.dart';
 import 'package:palhetas/util/services/tts.dart';
 import 'package:palhetas/util/widgets/main.dart';
-import 'package:share_plus/share_plus.dart';
 
 class NewsItem extends StatefulWidget {
   const NewsItem({super.key, required this.articleID});

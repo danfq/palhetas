@@ -1,10 +1,9 @@
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:drop_shadow/drop_shadow.dart';
-import 'package:flutter/material.dart';
+import 'package:flutter/widgets.dart';
 import 'package:get/route_manager.dart';
 import 'package:palhetas/pages/events/single.dart';
 import 'package:palhetas/util/data/events.dart';
-import 'package:smooth_page_indicator/smooth_page_indicator.dart';
 
 class Events extends StatefulWidget {
   const Events({super.key});
@@ -18,7 +17,7 @@ class _EventsState extends State<Events> {
   final PageController _pageController = PageController();
 
   ///Carousel Controller
-  final CarouselController _carouselController = CarouselController();
+  final _carouselController = CarouselSliderController();
 
   ///Current Index
   int _currentIndex = 0;
@@ -102,8 +101,6 @@ class _EventsState extends State<Events> {
             mainAxisSize: MainAxisSize.max,
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              Center(child: CircularProgressIndicator()),
-              SizedBox(height: 20.0),
               Center(child: Text("A Carregar Eventos...")),
             ],
           );
