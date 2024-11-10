@@ -12,4 +12,4 @@ Mantenha-se a par de tudo sobre a Figueira da Foz, incluíndo Eventos!
 Para usar a App, pode transferir as respetivas versões aqui:
 
 - [iOS (Apple)](https://apps.apple.com/ie/app/palhetas/id6479218624).
-- [Android](https://github.com/danfq/palhetas/releases)
+- [Android](https://github.com/danfq/palhetas/releases).
