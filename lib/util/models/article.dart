@@ -93,7 +93,17 @@ class Article extends StatelessWidget {
         padding: const EdgeInsets.all(10.0),
         child: InkWell(
           borderRadius: BorderRadius.circular(14.0),
-          onTap: () => Get.to(() => NewsItem(articleID: id)),
+          onTap: () {
+            //Debug
+            debugPrint("ID: '$id'.");
+
+            if (id.isNotEmpty) {
+              Get.toNamed("/article", parameters: {"id": id});
+            } else {
+              //Debug
+              debugPrint("Invalid ID: '$id'.");
+            }
+          },
           child: Padding(
             padding: const EdgeInsets.all(4.0),
             child: Row(

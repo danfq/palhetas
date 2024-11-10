@@ -28,12 +28,7 @@ void main() async {
           getPages: [
             GetPage(name: "/", page: () => const Palhetas()),
             GetPage(name: "/intro", page: () => const Intro()),
-            GetPage(
-              name: "/article/:id",
-              page: () => NewsItem(
-                articleID: Get.parameters["id"]!,
-              ),
-            ),
+            GetPage(name: "/article", page: () => const NewsItem()),
           ],
           initialRoute: initialRoute,
         );

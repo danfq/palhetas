@@ -30,6 +30,7 @@ Future<void> fetchInBackground() async {
       await Notifications.sendNotification(
         title: "Nova Notícia",
         body: article.title,
+        payload: article.id,
       );
     }
   }
