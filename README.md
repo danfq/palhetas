@@ -1,16 +1,8 @@
-# palhetas
+# O Palhetas
 
-A new Flutter project.
+## O que é?
+`O Palhetas` é uma App disponível Android & iOS.
 
-## Getting Started
+Com a App, podem ler o blog [O Palhetas na Foz](https://opalhetasnafoz.blogspot.com/), comodamente, recebendo notificações por cada nova Notícia.
 
-This project is a starting point for a Flutter application.
-
-A few resources to get you started if this is your first Flutter project:
-
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
-
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+Mantenha-se a par de tudo sobre a Figueira da Foz, incluíndo Eventos!
