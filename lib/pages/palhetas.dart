@@ -1,5 +1,4 @@
 import 'dart:async';
-
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_vector_icons/flutter_vector_icons.dart';
@@ -117,35 +116,13 @@ class _PalhetasState extends State<Palhetas> {
       ),
       bottomNavigationBar: ClipRRect(
         borderRadius: const BorderRadius.vertical(top: Radius.circular(20.0)),
-        child: SalomonBottomBar(
-          currentIndex: _navIndex,
-          onTap: (index) {
+        child: MainWidgets.bottomNav(
+          navIndex: _navIndex,
+          onChanged: (index) {
             setState(() {
               _navIndex = index;
             });
           },
-          backgroundColor: Theme.of(context).dialogBackgroundColor,
-          selectedItemColor: Theme.of(context).colorScheme.secondary,
-          margin: const EdgeInsets.all(20.0),
-          items: [
-            //Home
-            SalomonBottomBarItem(
-              icon: const Icon(Ionicons.newspaper_outline),
-              title: const Text("Notícias"),
-            ),
-
-            //Events
-            SalomonBottomBarItem(
-              icon: const Icon(MaterialCommunityIcons.drama_masks),
-              title: const Text("Eventos"),
-            ),
-
-            //Offline
-            SalomonBottomBarItem(
-              icon: const Icon(Ionicons.ios_cloud_offline_outline),
-              title: const Text("Ler Offline"),
-            ),
-          ],
         ),
       ),
     );
