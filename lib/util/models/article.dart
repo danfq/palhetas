@@ -4,7 +4,6 @@ import 'package:flutter_slidable/flutter_slidable.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:flutter_vector_icons/flutter_vector_icons.dart';
 import 'package:get/route_manager.dart';
-import 'package:palhetas/pages/news/item.dart';
 import 'package:palhetas/util/data/constants.dart';
 import 'package:share_plus/share_plus.dart';
 
